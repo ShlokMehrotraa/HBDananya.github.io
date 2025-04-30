@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body, html {
+            width: 100%;
+            scroll-behavior: smooth;
+            background: #f7e9f0; /* Soft rose pink backdrop */
+        }
+        .section {
+            width: 100%;
+        }
+        .image-section {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: transparent;
+        }
+        .image-section img {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            display: block;
+        }
+
+        @media (min-aspect-ratio: 3/4) {
+            .image-section img {
+                margin-left: auto;
+                margin-right: auto;
+                padding-left: 10vw;
+                padding-right: 10vw;
+            }
+        }
+
+        @media (max-aspect-ratio: 3/4) {
+            .image-section img {
+                padding: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="section image-section">
+        <img src="5599921536.png" alt="First Page Image">
+    </div>
+    <div class="section image-section">
+        <img src="image.png" alt="Second Page Image">
+    </div>
+</body>
+</html>

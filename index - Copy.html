@@ -1,0 +1,995 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Pacifico&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #ffe6e6;
+            text-align: center;
+            overflow-x: hidden;
+            width: 100%;
+            scroll-behavior: smooth;
+        }
+        
+        .main-container {
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .page {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            padding: 0; /* Removed padding to eliminate gaps */
+            margin: 0; /* Added to ensure no margins between pages */
+        }
+        
+        .content {
+            width: 100%;
+            max-width: 1000px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0; /* Added to ensure no margins */
+        }
+        
+        .content img {
+            width: 100%;
+            max-width: 1000px;
+            height: auto;
+            display: block;
+            vertical-align: bottom; /* Prevents image gaps */
+        }
+        
+        .password-section {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-image: url('bg3.png');
+            background-size: cover;
+            background-position: center;
+            padding: 40px 0;
+            margin: 0; /* Ensure no margins */
+        }
+        
+        .password-boxes-container {
+            width: 100%;
+            max-width: 700px;
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 0 20px;
+        }
+        
+        .password-box {
+            background-color: white;
+            border-radius: 15px;
+            padding: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 280px;
+            text-align: center;
+        }
+        
+        .password-box h2 {
+            color: #ff4081;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin-top: 0;
+            font-size: 17px;
+        }
+        
+        .password-hint {
+            color: #888;
+            font-size: 13px;
+            margin-bottom: 12px;
+        }
+        
+        .password-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ff4081;
+            border-radius: 25px;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-align: center;
+            outline: none;
+        }
+        
+        .submit-button {
+            background-color: #ff4081;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+        }
+        
+        .submit-button:hover {
+            background-color: #e91e63;
+        }
+        
+        .password-feedback {
+            margin-top: 12px;
+            font-size: 13px;
+            height: 18px;
+        }
+        
+        .password-feedback.success {
+            color: #4CAF50;
+        }
+        
+        .password-feedback.error {
+            color: #f44336;
+        }
+        
+        .music-player {
+            display: none;
+            width: 90%;
+            max-width: 320px;
+            background-color: white;
+            border-radius: 15px;
+            padding: 18px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .music-player-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .player-text h3 {
+            color: #ff4081;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            margin-bottom: 5px;
+        }
+        
+        .record-container {
+            width: 160px;
+            height: 160px;
+            position: relative;
+            margin: 15px 0;
+            cursor: pointer;
+        }
+        
+        .vinyl-record {
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+            animation: none;
+            transition: transform 0.3s;
+        }
+        
+        .vinyl-record.playing {
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .record-grooves {
+            position: absolute;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+        }
+        
+        .record-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 35px;
+            height: 35px;
+            background-color: #ff4081;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .cake-section {
+            width: 100%;
+            background-image: url('bg3.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 40px 0;
+            margin: 0; /* Ensure no margins */
+        }
+        
+        .cake-container {
+            position: relative;
+            width: 70%;
+            max-width: 350px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;  /* Changed to column layout */
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
+        }
+        
+        .cake-image {
+            width: 80%;  /* Increased from 60% */
+            height: auto;
+            display: block;
+        }
+        
+        .cake-instruction {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 10px 18px;
+            border-radius: 15px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ff4081;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            animation: pulse 2s infinite;
+            width: 80%;  /* Changed from 40% */
+            text-align: center;  /* Ensure text is centered */
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .candle {
+            position: absolute;
+            width: 8px;
+            height: 45px;
+            border-radius: 4px 4px 0 0;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+        
+        .flame {
+            position: absolute;
+            top: -18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 22px;
+            background: radial-gradient(ellipse at bottom, #ffdb57 0%, #FF5722 80%);
+            border-radius: 50% 50% 20% 20%;
+            animation: flicker 0.8s infinite alternate;
+            filter: drop-shadow(0 0 8px #FFA000);
+        }
+        
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            100% { transform: translateX(-50%) scale(1.1); opacity: 1; }
+        }
+        
+        .happy-birthday-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            z-index: 1000;
+            pointer-events: none;
+            transition: opacity 0.5s;
+        }
+        
+        .happy-birthday-text {
+            font-family: 'Pacifico', 'Dancing Script', cursive;
+            font-size: 50px;
+            color: gold;
+            text-shadow: 0 0 15px #ff4081, 0 0 30px #ff4081;
+            animation: birthday-pulse 1s infinite alternate;
+            text-align: center;
+            padding: 0 20px;
+        }
+        
+        @keyframes birthday-pulse {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 15px #ff4081, 0 0 30px #ff4081;
+            }
+            100% {
+                transform: scale(1.1);
+                text-shadow: 0 0 20px #ff4081, 0 0 40px #ff4081, 0 0 60px gold;
+            }
+        }
+        
+        .mic-instruction {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.95);
+            padding: 18px 25px;
+            border-radius: 20px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ff4081;
+            font-size: 22px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            z-index: 1001;
+            animation: fadeIn 0.5s forwards;
+            width: 80%;
+            max-width: 450px;
+        }
+        
+        .popup {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 12px 20px;
+            border-radius: 15px;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #ff4081;
+            font-size: 16px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: bounce 1s infinite alternate;
+        }
+        
+        .confetti {
+            position: absolute;
+            z-index: 999;
+            pointer-events: none;
+        }
+        
+        .shake {
+            animation: shake 0.5s;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="page">
+            <div class="content">
+                <img src="5599921536.png" alt="First Page Image">
+            </div>
+        </div>
+        
+        <div class="page">
+            <div class="content">
+                <img src="image.png" alt="Second Page Image">
+            </div>
+        </div>
+        
+        <div class="page">
+            <div class="content">
+                <div class="password-section">
+                    <div class="password-boxes-container">
+                        <div class="password-box">
+                            <h2>Enter password to unlock letter</h2>
+                            <div class="password-hint">Hint: a word I use in every one of my letters</div>
+                            <input type="password" class="password-input" id="password-input" placeholder="Enter password...">
+                            <button class="submit-button" id="submit-password">Unlock</button>
+                            <div class="password-feedback" id="password-feedback"></div>
+                        </div>
+                        
+                        <div class="password-box">
+                            <h2>Enter password to unlock song</h2>
+                            <div class="password-hint">Hint: where stars aligned exactly one year ago</div>
+                            <input type="password" class="password-input" id="song-password-input" placeholder="Enter password...">
+                            <button class="submit-button" id="submit-song-password">Unlock</button>
+                            <div class="password-feedback" id="song-password-feedback"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="music-player" id="music-player">
+                        <div class="music-player-content">
+                            <div class="player-text">
+                                <h3>us an year ago 😙</h3>
+                            </div>
+                            
+                            <div class="record-container" id="record-container">
+                                <div class="vinyl-record" id="vinyl-record">
+                                    <div class="record-grooves"></div>
+                                    <div class="record-grooves"></div>
+                                    <div class="record-grooves"></div>
+                                    <div class="record-grooves"></div>
+                                </div>
+                                <div class="record-center">
+                                    <img src="us.png" alt="Us" id="record-image">
+                                </div>
+                            </div>
+                            
+                            <div class="song-details">
+                                <h3>Apocalypse</h3>
+                                <p class="artist-name">Cigarettes After Sex</p>
+                            </div>
+                        </div>
+                        
+                        <div class="progress-container" id="progress-container">
+                            <div class="progress-bar" id="progress-bar"></div>
+                        </div>
+                        
+                        <div class="time-display">
+                            <div id="current-time">0:00</div>
+                            <div id="duration">0:00</div>
+                        </div>
+                        
+                        <audio id="audio-player" src=""></audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="page">
+            <div class="content">
+                <div class="cake-section">
+                    <div class="cake-container" id="cake-container">
+                        <img src="cake.png" alt="Birthday Cake" class="cake-image">
+                        <div class="cake-instruction">Click this cake 8 times!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="happy-birthday-overlay" id="happy-birthday-overlay">
+        <div class="happy-birthday-text">HAPPY BIRTHDAY!</div>
+    </div>
+    
+    <div class="mic-instruction" id="mic-instruction">
+        Blow into your microphone to blow out the candles!
+    </div>
+    
+    <div class="popup" id="clickPopup">Click anywhere! ✨</div>
+
+    <script>
+	<script>
+// Create and display popup
+document.addEventListener('DOMContentLoaded', function() {
+    const popup = document.getElementById('clickPopup');
+    
+    // Make the whole document clickable for confetti
+    document.addEventListener('click', function() {
+        // Start multiple waves of confetti for at least 10 seconds
+        createConfettiWave();
+        
+        // Hide popup after first click
+        popup.style.display = 'none';
+    });
+    
+    // Password validation for letter
+    const passwordInput = document.getElementById('password-input');
+    const submitButton = document.getElementById('submit-password');
+    const feedbackElement = document.getElementById('password-feedback');
+    const passwordBox = document.querySelector('.password-box');
+    
+    submitButton.addEventListener('click', checkPassword);
+    passwordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkPassword();
+        }
+    });
+    
+    function checkPassword() {
+        const enteredPassword = passwordInput.value.toLowerCase();
+        const correctPassword = "rollercoaster";
+        
+        if (enteredPassword === correctPassword) {
+            // Password is correct
+            feedbackElement.textContent = "Password correct! Unlocking letter...";
+            feedbackElement.className = "password-feedback success";
+            
+            // Trigger download of letter.pdf and show simple popup
+            setTimeout(() => {
+                // Create download link
+                const downloadLink = document.createElement('a');
+                downloadLink.href = 'letter.pdf';
+                downloadLink.download = 'letter.pdf';
+                document.body.appendChild(downloadLink);
+                downloadLink.click();
+                document.body.removeChild(downloadLink);
+                
+                // Show simple popup
+                alert("mwa");
+            }, 1500);
+        } else {
+            // Password is incorrect
+            feedbackElement.textContent = "Incorrect password, please try again.";
+            feedbackElement.className = "password-feedback error";
+            
+            // Shake effect for incorrect password
+            passwordBox.classList.add('shake');
+            setTimeout(() => {
+                passwordBox.classList.remove('shake');
+            }, 500);
+        }
+    }
+    
+    // Password validation for song
+    const songPasswordInput = document.getElementById('song-password-input');
+    const submitSongButton = document.getElementById('submit-song-password');
+    const songFeedbackElement = document.getElementById('song-password-feedback');
+    const songPasswordBox = document.querySelectorAll('.password-box')[1];
+    const musicPlayer = document.getElementById('music-player');
+    const audioPlayer = document.getElementById('audio-player');
+    
+    submitSongButton.addEventListener('click', checkSongPassword);
+    songPasswordInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            checkSongPassword();
+        }
+    });
+    
+    function checkSongPassword() {
+        const enteredPassword = songPasswordInput.value.toLowerCase();
+        const correctPassword = "folks";
+        
+        if (enteredPassword === correctPassword) {
+            // Password is correct
+            songFeedbackElement.textContent = "Password correct! Unlocking song...";
+            songFeedbackElement.className = "password-feedback success";
+            
+            // Show music player and set up audio
+            setTimeout(() => {
+                // Make sure the audio source is set before showing the player
+                audioPlayer.src = "music.mp3"; // Use sound.mp3 file
+                
+                // Listen for the audio file to be loaded
+                audioPlayer.addEventListener('loadeddata', () => {
+                    // Show the music player once audio is ready
+                    musicPlayer.style.display = "block";
+                    
+                    // Set the starting time to 1:50 (110 seconds)
+                    audioPlayer.currentTime = 110;
+                    
+                    // Auto-play once ready
+                    audioPlayer.play().catch(e => {
+                        console.error("Audio playback failed:", e);
+                        // Fallback for browsers that prevent autoplay
+                        const vinylRecord = document.getElementById('vinyl-record');
+                        vinylRecord.classList.add('playing');
+                    });
+                });
+                
+                // Initialize the music player UI elements
+                initMusicPlayer();
+                
+                // Handle errors loading the audio
+                audioPlayer.addEventListener('error', (e) => {
+                    console.error("Audio error:", e);
+                    songFeedbackElement.textContent = "Error loading audio. Please try again.";
+                    songFeedbackElement.className = "password-feedback error";
+                });
+            }, 1500);
+        } else {
+            // Password is incorrect
+            songFeedbackElement.textContent = "Incorrect password, please try again.";
+            songFeedbackElement.className = "password-feedback error";
+            
+            // Shake effect for incorrect password
+            songPasswordBox.classList.add('shake');
+            setTimeout(() => {
+                songPasswordBox.classList.remove('shake');
+            }, 500);
+        }
+    }
+    
+    // Music player functionality with record player design
+    function initMusicPlayer() {
+        const progressBar = document.getElementById('progress-bar');
+        const progressContainer = document.getElementById('progress-container');
+        const currentTimeEl = document.getElementById('current-time');
+        const durationEl = document.getElementById('duration');
+        const vinylRecord = document.getElementById('vinyl-record');
+        const recordContainer = document.getElementById('record-container');
+        
+        // Once metadata is loaded, update UI elements
+        audioPlayer.addEventListener('loadedmetadata', () => {
+            durationEl.textContent = formatTime(audioPlayer.duration);
+            currentTimeEl.textContent = formatTime(110); // Start at 1:50
+        });
+        
+        // Play/pause functionality using the record
+        recordContainer.addEventListener('click', () => {
+            if (audioPlayer.paused) {
+                // Try to play and handle any errors
+                audioPlayer.play()
+                    .then(() => {
+                        vinylRecord.classList.add('playing');
+                    })
+                    .catch(err => {
+                        console.error("Playback failed:", err);
+                        // May be due to browser autoplay restrictions
+                        alert("Click anywhere on the page first, then try playing again");
+                    });
+            } else {
+                audioPlayer.pause();
+                vinylRecord.classList.remove('playing');
+            }
+        });
+        
+        // Auto-add playing class when audio is playing
+        audioPlayer.addEventListener('playing', () => {
+            vinylRecord.classList.add('playing');
+        });
+        
+        // Remove playing class when audio is paused
+        audioPlayer.addEventListener('pause', () => {
+            vinylRecord.classList.remove('playing');
+        });
+        
+        // Update progress bar
+        audioPlayer.addEventListener('timeupdate', () => {
+            const progress = (audioPlayer.currentTime / audioPlayer.duration) * 100;
+            progressBar.style.width = `${progress}%`;
+            
+            // Update time display
+            currentTimeEl.textContent = formatTime(audioPlayer.currentTime);
+        });
+        
+        // Click on progress bar to seek
+        progressContainer.addEventListener('click', (e) => {
+            const width = progressContainer.clientWidth;
+            const clickX = e.offsetX;
+            const duration = audioPlayer.duration;
+            
+            audioPlayer.currentTime = (clickX / width) * duration;
+        });
+        
+        // Format time to MM:SS
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        }
+        
+        // When song ends
+        audioPlayer.addEventListener('ended', () => {
+            vinylRecord.classList.remove('playing');
+            progressBar.style.width = '0%';
+            audioPlayer.currentTime = 110; // Reset to 1:50
+        });
+    }
+    
+    // Birthday Cake Functionality
+    const cakeContainer = document.getElementById('cake-container');
+    const happyBirthdayOverlay = document.getElementById('happy-birthday-overlay');
+    const micInstruction = document.getElementById('mic-instruction');
+    let clickCount = 0;
+    let candles = [];
+    let candleCount = 0;
+    const totalCandles = 8;
+    let blowDetected = false;
+    let audioContext = null;
+    let micStream = null;
+    
+    // Updated candle positions - one candle on right (30% of cake) and seven on left (70% of cake)
+    const candlePositions = [
+        // Single candle on right side (around 30% of cake)
+        { left: 0.7, top: 0.22 },   // Right side candle
+        
+        // Seven candles on left side (around 70% of cake)
+        { left: 0.25, top: 0.25 },
+        { left: 0.30, top: 0.22 },
+        { left: 0.35, top: 0.20 },
+        { left: 0.40, top: 0.18 },
+        { left: 0.45, top: 0.19 },
+        { left: 0.50, top: 0.21 },
+        { left: 0.55, top: 0.23 }
+    ];
+    
+    // Candle colors
+    const candleColors = [
+        '#FF5252', // Red
+        '#FF9800', // Orange
+        '#FFEB3B', // Yellow
+        '#4CAF50', // Green
+        '#2196F3', // Blue
+        '#9C27B0', // Purple
+        '#FF4081', // Pink
+        '#00BCD4'  // Cyan
+    ];
+    
+    cakeContainer.addEventListener('click', function() {
+        if (clickCount < totalCandles) {
+            addCandle();
+            clickCount++;
+            
+            if (clickCount === totalCandles) {
+                // Show microphone instruction after all candles are added
+                setTimeout(() => {
+                    micInstruction.style.display = 'block';
+                    initMicrophone();
+                }, 1000);
+            }
+        }
+    });
+    
+    function addCandle() {
+        const candle = document.createElement('div');
+        candle.className = 'candle';
+        candle.style.backgroundColor = candleColors[candleCount];
+        
+        // Get the cake image element
+        const cakeImage = cakeContainer.querySelector('.cake-image');
+        const cakeWidth = cakeImage.offsetWidth;
+        const cakeHeight = cakeImage.offsetHeight;
+        
+        // Position the candle using absolute positioning
+        // Get the position relative to the cake image
+        const position = candlePositions[candleCount];
+        
+        // Calculate absolute position within the cake container
+        const absoluteLeft = position.left * cakeWidth;
+        const absoluteTop = position.top * cakeHeight;
+        
+        // Set the position
+        candle.style.position = 'absolute';
+        candle.style.left = `${absoluteLeft}px`;
+        candle.style.top = `${absoluteTop}px`;
+        
+        // Add flame
+        const flame = document.createElement('div');
+        flame.className = 'flame';
+        candle.appendChild(flame);
+        
+        // Add to cake container
+        cakeContainer.appendChild(candle);
+        candles.push(candle);
+        candleCount++;
+        
+        // For debugging
+        console.log(`Added candle ${candleCount} at position: left=${absoluteLeft}px, top=${absoluteTop}px`);
+    }
+    
+    function initMicrophone() {
+        if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+            alert('Your browser does not support microphone access. Try using Chrome or Firefox.');
+            return;
+        }
+        
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+            .then(stream => {
+                micStream = stream;
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const analyser = audioCtx.createAnalyser();
+                const microphone = audioCtx.createMediaStreamSource(stream);
+                
+                microphone.connect(analyser);
+                analyser.fftSize = 256;
+                
+                const bufferLength = analyser.frequencyBinCount;
+                const dataArray = new Uint8Array(bufferLength);
+                
+                function checkAudioInput() {
+                    analyser.getByteFrequencyData(dataArray);
+                    
+                    // Calculate average volume
+                    let sum = 0;
+                    for (let i = 0; i < bufferLength; i++) {
+                        sum += dataArray[i];
+                    }
+                    const average = sum / bufferLength;
+                    
+                    // Detect blow (lower threshold for easier detection)
+                    if (average > 30 && !blowDetected) { // Lowered threshold from 40 to 30
+                        blowOutCandles();
+                        blowDetected = true;
+                        
+                        // Stop monitoring
+                        if (micStream) {
+                            micStream.getTracks().forEach(track => track.stop());
+                        }
+                        
+                        return;
+                    }
+                    
+                    // Continue checking
+                    if (!blowDetected) {
+                        requestAnimationFrame(checkAudioInput);
+                    }
+                }
+                
+                // Start monitoring
+                checkAudioInput();
+            })
+            .catch(error => {
+                console.error('Error accessing microphone:', error);
+                alert('Could not access microphone. Please check permissions.');
+                
+                // Fallback if microphone access fails - allow clicking to blow out candles
+                micInstruction.textContent = "Click here to blow out the candles!";
+                micInstruction.addEventListener('click', function() {
+                    blowOutCandles();
+                    micInstruction.style.display = 'none';
+                });
+            });
+    }
+    
+    function blowOutCandles() {
+        // Hide mic instruction
+        micInstruction.style.display = 'none';
+        
+        // Blow out each candle with clear animation
+        candles.forEach((candle, index) => {
+            const flame = candle.querySelector('.flame');
+            setTimeout(() => {
+                // Remove the flame element completely
+                if (flame && flame.parentNode) {
+                    flame.parentNode.removeChild(flame);
+                }
+            }, index * 100); // Stagger effect
+        });
+        
+        // Shake screen
+        document.body.classList.add('shake');
+        setTimeout(() => {
+            document.body.classList.remove('shake');
+        }, 500);
+        
+        // Show Happy Birthday message
+        setTimeout(() => {
+            happyBirthdayOverlay.style.opacity = '1';
+            
+            // Create a big confetti celebration
+            createConfettiWave();
+            
+            // Hide after 10 seconds
+            setTimeout(() => {
+                happyBirthdayOverlay.style.opacity = '0';
+            }, 10000);
+        }, 1000);
+    }
+});
+
+// Function to create a sustained confetti effect over time
+function createConfettiWave() {
+    // Initial wave
+    createConfetti();
+    
+    // Continue creating confetti waves for 10+ seconds
+    let elapsed = 0;
+    const interval = 800; // New wave every 800ms
+    const totalDuration = 10000; // 10 seconds minimum
+    
+    const confettiInterval = setInterval(() => {
+        createConfetti();
+        elapsed += interval;
+        
+        if (elapsed >= totalDuration) {
+            clearInterval(confettiInterval);
+        }
+    }, interval);
+}
+
+// Function to create confetti falling from above the screen
+function createConfetti() {
+    // Create 40 confetti pieces per wave
+    for (let i = 0; i < 40; i++) {
+        const confetti = document.createElement('div');
+        confetti.classList.add('confetti');
+        
+        // Add random shape classes
+        const shapes = ['square', 'circle', 'triangle'];
+        const shape = shapes[Math.floor(Math.random() * shapes.length)];
+        confetti.classList.add(shape);
+        
+        // Randomize confetti appearance
+        const size = Math.random() * 12 + 6; // Size between 6-18px
+        const colors = [
+            'rgba(255, 118, 117, 0.7)', // translucent red
+            'rgba(116, 185, 255, 0.7)', // translucent blue
+            'rgba(85, 239, 196, 0.7)',  // translucent green
+            'rgba(255, 234, 167, 0.7)', // translucent yellow
+            'rgba(250, 177, 160, 0.7)', // translucent peach
+            'rgba(162, 155, 254, 0.7)', // translucent purple
+            'rgba(253, 121, 168, 0.7)'  // translucent pink
+        ];
+        const color = colors[Math.floor(Math.random() * colors.length)];
+        
+        confetti.style.width = `${size}px`;
+        confetti.style.height = `${size}px`;
+        confetti.style.backgroundColor = color;
+        
+        // Set starting positions across the top of the page (including above the viewport)
+        const windowWidth = window.innerWidth;
+        const startY = -100 - Math.random() * 150; // Start above the viewport (-100px to -250px)
+        confetti.style.left = `${Math.random() * windowWidth}px`;
+        confetti.style.top = `${startY}px`;
+        
+        // Add to body
+        document.body.appendChild(confetti);
+        
+        // Create more dynamic animation with JS instead of CSS
+        const duration = Math.random() * 5 + 8; // 8-13 seconds duration
+        const endTime = Date.now() + duration * 1000;
+        
+        // Random horizontal drift and vertical speed
+        const horizontalDrift = Math.random() * 400 - 200; // -200px to +200px
+        const verticalSpeed = Math.random() * 50 + 70; // 70-120px per second
+        const rotationSpeed = Math.random() * 360 - 180; // -180 to +180 degrees per second
+        const initialRotation = Math.random() * 360;
+        
+        let currentY = startY;
+        let currentRotation = initialRotation;
+        
+        // Animate the confetti
+        function animateConfetti() {
+            const now = Date.now();
+            const progress = (now - (endTime - duration * 1000)) / (duration * 1000);
+            const elapsed = progress * duration;
+            
+            // Calculate new position
+            currentY = startY + (verticalSpeed * elapsed);
+            const horizontalPosition = parseFloat(confetti.style.left) + horizontalDrift * Math.sin(progress * Math.PI) / duration;
+            currentRotation = initialRotation + rotationSpeed * elapsed;
+            
+            // Update position and rotation
+            confetti.style.top = `${currentY}px`;
+            confetti.style.left = `${horizontalPosition}px`;
+            confetti.style.transform = `rotate(${currentRotation}deg)`;
+            
+            // Gradually fade out near the end
+            if (progress > 0.7) {
+                confetti.style.opacity = 0.7 * (1 - ((progress - 0.7) / 0.3));
+            }
+            
+            // Continue animation if not complete
+            if (now < endTime) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                // Remove when animation complete
+                if (confetti.parentNode === document.body) {
+                    document.body.removeChild(confetti);
+                }
+            }
+        }
+        
+        // Start animation
+        requestAnimationFrame(animateConfetti);
+    }
+}
+    </script>
+</body>
+</html>
